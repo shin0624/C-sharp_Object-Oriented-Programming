@@ -1,0 +1,76 @@
+using System;
+
+namespace 복사_값_과_참조
+{
+
+
+    class Knight   
+    {
+        public int hp;
+        public int attack;
+
+        public Knight Clone()//Deep Copy
+        {
+            Knight knight = new Knight();
+            knight.hp = hp;
+            knight.attack =attack;
+            return knight;
+        }
+
+        public void Move()
+        {
+            Console.WriteLine("Knight Move");
+        }
+
+        public void Attack()
+        {
+            Console.WriteLine("Knight Attack");
+        }
+    }
+
+     struct Mage //struct와 class 선언의 차이 = struct는 기본적으로 copy(복사)해서 변수를 넘김, class는 ref(참조)해서 변수를 넘김
+    {
+        public int hp;
+        public int attack;
+    }
+
+
+    class Program
+    {
+        static void KillMage(Mage mage)
+        {
+            mage.hp = 0;
+        }
+
+        static void KillKnight(Knight knight)
+        {
+            knight.hp = 0;
+        }
+        static void Main(string[] args)
+        {
+            Mage mage;
+            mage.hp = 100;
+            mage.attack = 50;
+
+            Mage mage2 = mage;//-->hp = 100
+            mage2.hp = 0;
+
+            // KillMage(mage);//-->hp = 100
+
+            Knight knight = new Knight();
+            knight.hp = 100;
+            knight.attack = 10;
+            knight.Move();
+            knight.Attack();
+
+            // Knight knight2 = knight;//-->hp=0이 되어버림->  서로 다른 knight 2개를 만들려 했으나 struct는 참조로 변수를 넘겨버리기 떄문에 knight값과 Knight2의 값이 같아져버림
+            //knight2.hp = 0;
+            Knight knight2 = knight.Clone();
+            knight2.hp = knight.hp;
+            knight2.attack = knight.attack; // --> 이렇게 하면 knight와 knight2는 서로 다른 객체로 독립된다
+
+
+          //  KillKnight(knight);//-->hp=0
+        }
+    }
+}
