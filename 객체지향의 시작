@@ -1,0 +1,43 @@
+using System;
+
+namespace 객체지향의_시작
+{
+    
+    //절차(procedure) 지향 ex)text rpg같이 함수들의 호출 순서가 가장 중요/순서에 종속되어버림, 프로그램이 커질 수록 유지보수 힘듦
+        
+        //객체 지향(object oriented programming= OOP)
+
+        //knight
+        //속성 : hp, attack, pos(좌표, 현재위치)
+        //기능 : Move, Attack, Die
+
+        class Knight    //knight라는 객체의 설계도에 해당
+        {
+        public int hp;
+        public int attack;//public을 안붙이면 attack은 class kinght 안에서만 쓸 수 있음
+
+        public void Move()
+        {
+            Console.WriteLine("Knight Move");
+        }
+         
+        public void Attack()
+        {
+            Console.WriteLine("Knight Attack");
+        }
+        }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Knight knight = new Knight();//new = 객체를 새로 생성/new를 지워버리면 실행이 안됨
+
+            knight.hp = 100;
+            knight.attack = 10;
+
+            knight.Move();
+            knight.Attack();
+        }
+    }
+}
