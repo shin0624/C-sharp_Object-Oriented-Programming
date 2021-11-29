@@ -1,0 +1,65 @@
+using System;
+
+namespace 생성자
+{
+
+
+    class Knight
+    {
+        public int hp;
+        public int attack;
+
+
+        public Knight()//-->생성자->앞에 void 등을 붙이면 안됨
+        {
+            hp = 100;
+            attack = 10;
+            Console.WriteLine("생성자 호출");
+        }
+
+        public Knight(int hp) : this()//-->먼저 위의 디폴트 생성자가 출력되고 이후에 인자가 있는 생성자가 출력
+        {
+            this.hp = hp;//-->this.hp라고 쓰면 public knight(int hp)<-괄호 안에 있는 hp를 가리키게 된다.
+            Console.WriteLine("int 생성자 호출");
+        }
+
+        public Knight(int hp, int attack)//-->두개의 인자 호출
+        {
+            this.hp = hp;
+            this.attack = attack;
+            Console.WriteLine("int, int 생성자 호출");
+        }
+
+
+        public Knight Clone()//Deep Copy
+        {
+            Knight knight = new Knight();
+            knight.hp = hp;
+            knight.attack = attack;
+            return knight;
+        }
+
+        public void Move()
+        {
+            Console.WriteLine("Knight Move");
+        }
+
+        public void Attack()
+        {
+            Console.WriteLine("Knight Attack");
+        }
+    }
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Knight knight = new Knight(50, 5);//-->new를 붙이면 위의 생성자 knight에서 자동으로 hp=100, attack=10을 채워줌
+            //밑에 hp, attack 등을 추가하지 않은 경우-->생성자 이용
+            //()에 아무것도 넣지 않으면 생성자에 입력된 디폴트값(hp=100, attack=10)으로 출력되지만
+            //위와같이 숫자를 넣고 생성자에 인자를 넣어주면 public Knight(int hp)가 실행된다            
+            //(50,5)처럼 두개의 인자가 있을 때는 위에 (in thp, int attack)이 출력됨
+        }
+    }
+}
