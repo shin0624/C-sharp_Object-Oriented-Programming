@@ -1,0 +1,64 @@
+using System;
+
+namespace Stacic이란
+{
+
+
+    class Knight
+    {
+
+        //필드
+        static public int a; //a라는 필드는 knight라는 class에 종속-->a의 값은, 아래의 개체들이 공유해서 a하나만을 사용(오로지 1개만 존재)
+        public int hp;
+        public int attack;
+
+        static public int counter = 1;//한 클래스에서 오직 한 개만 존재하는 것을 만들 때 static이 매우 유용함
+                                      //static을 빼면 그 필드는 객체(인스턴스) 자체에만 종속됨
+        public int id;
+
+
+        public Knight()
+        {
+            id = counter;
+            counter++;//--->knight캐릭터를 생성할 때 마다 id값이 1씩 증가(플레이어별 고유 id를 발급하는 카운터)
+
+            hp = 100;
+            attack = 10;
+            Console.WriteLine("생성자 호출");
+        }
+
+        static public Knight CreateKnight()
+        {
+            Knight knight = new Knight();
+            knight.hp = 100;
+            knight.attack = 1;
+            return knight;
+        }
+
+
+  }
+
+
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            // 필드에 있는 값들은 아래의 각 개체(인스턴스)마다 제각각이다
+            //Knight knight = new Knight();
+           // Knight knight2 = new Knight();
+           // knight2.hp = 80;
+            //Knight knight3 = new Knight();
+           // knight3.hp = 200;
+
+            Knight knight = Knight.CreateKnight(); //static의 예
+            knight.Move();// 일반
+
+            Console.WriteLine();//static
+
+            Random rand = new Random();//일반
+            rand.Next();
+               
+        }
+    }
+}
