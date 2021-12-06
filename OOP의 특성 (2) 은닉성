@@ -1,0 +1,50 @@
+using System;
+
+namespace 은닉성
+{   
+    class Knight
+    {
+        //접근 한정자 
+        //public   protected  private 
+        //접근 한정자를 붙이지 않고 int hp 로만 입력했으면 기본적을 private로 동작된다.
+        
+        public void SecretFunction()//모두에게 공유 가능
+        {
+        }
+        private int hp;
+        private void SecretFunction2()//--> class 내에서 정의된 로직에서만 사용 가능
+        {
+           
+        }
+
+        public void SetHP(int hp)
+        {
+            this.hp = hp;//-->왜 HP를 private로 걸어놓고 class 밖에서 this.으로 세팅이 가능하게 했나?
+                           // 만약 public int hp; 였을 경우, 다른 코드에서 hp 값 수정을 반복 하다 후에 코드가 점점 비대해질 때
+                           //누가 hp를 고쳤는지 찾기 굉장히 힘들다. 반면 private int hp;에서 SetHP를 통해 hp값을 수정하면, 
+                           //break point를 잡아 호출 스택을 보면 어디서 접근했는지 쉽게 판단할 수 있기때문에 유용하기 때문
+        }     
+   }
+  class Mage
+        {
+            protected int hp;//-->protected의 특징 : 상속받있으면 외부에서 접근 가능                            
+        }
+
+   class SuperMage : Mage
+    {
+        void Test()
+        {
+            hp = 10;//private로 하면 에러발생
+        }
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Knight knight = new Knight();
+                knight.SetHP(100);//-->HP 라는 변수에 바로 접근할 수는 없지만 SetHP를 통해 세팅이 가능
+        }
+    }
+}
