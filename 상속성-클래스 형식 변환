@@ -1,0 +1,50 @@
+using System;
+
+namespace 클래스_형식_변환
+{
+class Player
+    {
+        protected int hp;
+        protected int attack;
+    }
+    class Knight : Player
+    {
+
+    }
+    class Mage : Player
+    {
+        public int mp;
+    }
+
+    class Program
+    {
+        static void EnterGame(Player player)
+        {
+            bool isMage = (player is Mage);//-->클래스 변환 시 컴파일 후 실행하면 크래시가 발생하는가를 체크할 수 있는 문법
+            if(isMage)
+            {
+                Mage mage = (Mage)player;
+                mage.mp = 10;
+            }
+
+            //Mage mage = (player as Mage);-->크래시 발생유무 체크 가능 문법2
+            //if(mage!=null)
+            //{
+             //   mage.hp = 10;
+            //}
+        }
+        static void Main(string[] args)
+        {
+            Knight knight = new Knight();
+            Mage mage = new Mage();
+            //Mage 타입->Player타입(o)
+            //Player 타입->Mage 타입(x)
+            Player magePlayer = mage;
+            Mage mage2 = (Mage)magePlayer;//->(Mage)를 붙이면 타입 변환 가능 / 부모클래스->자식클래스로의 변환은 문제없지만 그 이외(knight->mage)로의 변환은 안됨
+
+
+            EnterGame(knight);
+            EnterGame(mage);
+        }
+    }
+}
