@@ -1,0 +1,27 @@
+using System;
+
+namespace 문자열
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string name = "Harry Potter";
+
+            //1.찾기
+            bool found = name.Contains("Harry");//->어떤 문자열이 name 안에 있는가를 확인
+            int index = name.IndexOf('P');//어떤 특정 문자가 name 내의 몇번 째 인덱스에 있는가를 확인, 있을경우 해당숫자, 없을경우 -1
+
+            //2. 변형(추가, 삭제)
+            name = name + " Junior";
+            string lowerCaseName = name.ToLower();//->id의 중복요소를 체크할 때 대소문자 구분없이 모두 소문자로 바꾸어 체크.
+            string upperCaseName = name.ToUpper();//->모두 대문자로 바꾸어 체크
+
+            string newName = name.Replace('r', 'l');//->r을 l로 바꿀 수 있다.
+
+            //3. 분할
+            string[] names = name.Split(new char[] { ' ' });//띄어쓰기로 문자를 분리 (harry, potter, junior 3개로 분리)
+            string substringName = name.Substring(5);//->5번 인덱스부터 새로운 이름을 만들 수 있다.(potter junior)
+        }
+    }
+}
